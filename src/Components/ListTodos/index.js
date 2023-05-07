@@ -14,7 +14,7 @@ function ListTodos() {
 
 function renderTodo({ title, dueDate, priority, status, notes }) {
   return (
-    <li className="todo">
+    <li key={title} className="todo">
       <h4 className="todo-title">{title}</h4>
       <p className="todo-due-date">{dueDate}</p>
       <p className="todo-priority">{priority}</p>
