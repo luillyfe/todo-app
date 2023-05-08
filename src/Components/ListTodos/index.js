@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { formatDate } from "../../utils";
 
@@ -8,14 +9,14 @@ import { selectTodos } from "../../redux/reducers/todosReducer";
 
 function ListTodos() {
   const todos = useSelector(selectTodos);
-  const keys = Object.keys(todos);
+  const todoIds = Object.keys(todos);
 
   return (
-    <ul className="list-todos">{keys.map((key) => renderTodo(todos[key]))}</ul>
+    <ul className="list-todos">{todoIds.map((id) => renderTodo(todos[id]))}</ul>
   );
 }
 
-function renderTodo({ title, dueDate, priority, status, notes }) {
+function renderTodo({ title, dueDate, priority, status, notes, id }) {
   return (
     <li key={title} className="todo">
       <h4 className="todo-title">{title}</h4>
@@ -23,6 +24,7 @@ function renderTodo({ title, dueDate, priority, status, notes }) {
       <p className="todo-priority">{priority}</p>
       <p className="todo-status">{status}</p>
       <p className="todo-notes">{notes}</p>
+      <Link to={`/todos/edit/${id}`} className="btn btn-primary btn-lg"></Link>
     </li>
   );
 }

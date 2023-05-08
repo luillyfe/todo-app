@@ -5,13 +5,14 @@ import { Provider as ReduxProvider } from "react-redux";
 
 import reportWebVitals from "./reportWebVitals";
 import ErrorPage from "./ErrorPage";
+import store from "./redux";
 
 import App from "./App";
-import CreateTodos from "./Components/CreateTodos";
+import CreateTodo from "./Components/CreateTodos";
 import ListTodos from "./Components/ListTodos";
+import EditTodo from "./Components/EditTodos";
 
 import "./index.css";
-import store from "./redux";
 
 const router = createBrowserRouter([
   {
@@ -19,7 +20,8 @@ const router = createBrowserRouter([
     Component: App,
     errorElement: <ErrorPage />,
     children: [
-      { path: "todos/add", element: <CreateTodos /> },
+      { path: "/todos/add", element: <CreateTodo /> },
+      { path: "/todos/edit/:id", element: <EditTodo /> },
       { path: "", element: <ListTodos /> },
     ],
   },
