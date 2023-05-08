@@ -1,10 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./createTodos.css";
+import { useDispatch } from "react-redux";
+import { addTodo } from "../../redux/reducers/todosReducer";
+
+const initialState = {
+  title: "",
+  description: "",
+  dueDate: "",
+  priority: "",
+  status: "",
+};
 
 function CreateTodos() {
+  const [todo, setTodo] = useState(initialState);
+  const dispatch = useDispatch();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    dispatch(addTodo(todo));
+    setTodo(initialState);
+  };
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setTodo({ ...todo, [name]: value });
+  };
+
   return (
-    <form method="post">
+    <form method="post" onSubmit={handleSubmit}>
       <div className="form-group">
         <label htmlFor="title">Title</label>
         <input
@@ -15,6 +42,8 @@ function CreateTodos() {
           placeholder="Title"
           required
           minLength="5"
+          value={todo.title}
+          onChange={handleChange}
         />
       </div>
       <div className="form-group">
@@ -25,16 +54,20 @@ function CreateTodos() {
           id="description"
           name="description"
           placeholder="Description"
+          value={todo.description}
+          onChange={handleChange}
         />
       </div>
       <div className="form-group">
-        <label htmlFor="due_date">Due Date</label>
+        <label htmlFor="dueDate">Due Date</label>
         <input
           type="date"
           className="form-control"
-          id="due_date"
-          name="due_date"
+          id="dueDate"
+          name="dueDate"
           placeholder="Due Date"
+          value={todo.dueDate}
+          onChange={handleChange}
         />
       </div>
       <div className="form-group">
@@ -47,6 +80,8 @@ function CreateTodos() {
           placeholder="Priority"
           minLength="1"
           maxLength="5"
+          value={todo.priority}
+          onChange={handleChange}
         />
       </div>
       <div className="form-group">
@@ -58,6 +93,7 @@ function CreateTodos() {
             id="status1"
             name="status"
             value="pending"
+            onChange={handleChange}
           />
           <label htmlFor="status1">Pending</label>
         </div>
@@ -68,6 +104,7 @@ function CreateTodos() {
             id="status2"
             name="status"
             value="completed"
+            onChange={handleChange}
           />
           <label htmlFor="status2">Completed</label>
         </div>
