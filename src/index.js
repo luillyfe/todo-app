@@ -7,7 +7,8 @@ import reportWebVitals from "./reportWebVitals";
 import ErrorPage from "./ErrorPage";
 
 import App from "./App";
-import CreateTodos from "./Components/CreateTodos.js";
+import CreateTodos from "./Components/CreateTodos";
+import ListTodos from "./Components/ListTodos";
 
 import "./index.css";
 import store from "./redux";
@@ -17,8 +18,11 @@ const router = createBrowserRouter([
     path: "/",
     Component: App,
     errorElement: <ErrorPage />,
+    children: [
+      { path: "todos/add", element: <CreateTodos /> },
+      { path: "", element: <ListTodos /> },
+    ],
   },
-  { path: "create", Component: CreateTodos },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

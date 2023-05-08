@@ -4,12 +4,7 @@ import "./todoList.css";
 
 const todos = createTodos();
 function ListTodos() {
-  return (
-    <div>
-      <h2>Todos:</h2>
-      <ul className="list-todos">{todos.map(renderTodo)}</ul>
-    </div>
-  );
+  return <ul className="list-todos">{todos.map(renderTodo)}</ul>;
 }
 
 function renderTodo({ title, dueDate, priority, status, notes }) {

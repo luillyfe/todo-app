@@ -4,6 +4,8 @@ form {
 
   align-items: center;
   gap: 20px;
+
+  margin-top: 16px;
 }
 
 .form-group {

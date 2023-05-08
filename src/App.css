@@ -1,3 +1,21 @@
-.App {
-  text-align: center;
+.container-fluid {
+  display: flex;
+}
+
+#sidebar {
+  display: flex;
+  flex-direction: column;
+
+  width: 20vw;
+}
+
+#detail {
+  width: 80vw;
+}
+
+a {
+  text-decoration: none;
+  font-weight: bold;
+
+  list-style: none;
 }
