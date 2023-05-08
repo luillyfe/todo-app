@@ -1,39 +1,30 @@
 import React from "react";
+import { useSelector } from "react-redux";
+
+import { formatDate } from "../../utils";
 
 import "./todoList.css";
+import { selectTodos } from "../../redux/reducers/todosReducer";
 
-const todos = createTodos();
 function ListTodos() {
-  return <ul className="list-todos">{todos.map(renderTodo)}</ul>;
+  const todos = useSelector(selectTodos);
+  const keys = Object.keys(todos);
+
+  return (
+    <ul className="list-todos">{keys.map((key) => renderTodo(todos[key]))}</ul>
+  );
 }
 
 function renderTodo({ title, dueDate, priority, status, notes }) {
   return (
     <li key={title} className="todo">
       <h4 className="todo-title">{title}</h4>
-      <p className="todo-due-date">{dueDate}</p>
+      <p className="todo-due-date">{formatDate(dueDate)}</p>
       <p className="todo-priority">{priority}</p>
       <p className="todo-status">{status}</p>
       <p className="todo-notes">{notes}</p>
     </li>
   );
-}
-
-function createTodos() {
-  let todos = [];
-  for (let index = 0; index < 10; index++) {
-    todos = [
-      ...todos,
-      {
-        title: "Buy groceries",
-        dueDate: "Due: March 15, 2023",
-        priority: "High",
-        status: "Pending",
-        notes: "Milk, eggs, bread, cheese",
-      },
-    ];
-  }
-  return todos;
 }
 
 export default ListTodos;

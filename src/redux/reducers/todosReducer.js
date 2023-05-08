@@ -1,6 +1,11 @@
-import { createAction, createReducer } from "@reduxjs/toolkit";
+import { createAction, createReducer, createSelector } from "@reduxjs/toolkit";
 
 export const addTodo = createAction("todos/addTodo");
+
+export const selectTodos = createSelector(
+  (state) => state.todos,
+  (todos) => (todos ? todos : {})
+);
 
 const initialState = {};
 export default createReducer(initialState, (builder) => {
