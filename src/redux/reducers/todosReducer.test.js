@@ -3,7 +3,7 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import todosReducer, { addTodo } from "./todosReducer";
 
-it("It should create a todo", () => {
+it("Action: It should create a todo", () => {
   // arrange
   const store = configureStore({ reducer: { todos: todosReducer } });
   const todo = setupTodo();
@@ -13,6 +13,17 @@ it("It should create a todo", () => {
 
   // assert
   expect(store.getState()).toEqual({ todos: { [todo.title]: todo } });
+});
+
+it("Reducer: It should create a todo", () => {
+  // arrange
+  const todo = setupTodo();
+
+  // act
+  const newState = todosReducer({}, addTodo(todo));
+
+  // assert
+  expect(newState).toEqual({ [todo.title]: todo });
 });
 
 function setupTodo() {
