@@ -7,14 +7,9 @@ import { render, screen } from "@testing-library/react";
 import EditTodos from "./index";
 import rootReducer from "../../redux/reducers";
 
-const store = configureStore({ reducer: rootReducer });
 it("It should find elments with its corresponding labels", () => {
   // arrange
-  render(
-    <Provider store={store}>
-      <EditTodos />
-    </Provider>
-  );
+  renderWithProviders(<EditTodos />, {});
 
   // assert
   screen.getByText("Title");
@@ -24,3 +19,19 @@ it("It should find elments with its corresponding labels", () => {
   screen.getByText("Pending");
   screen.getByText("Completed");
 });
+
+function renderWithProviders(
+  ui,
+  {
+    preloadedState = {},
+    // Automatically create a store instance if no store was passed in
+    store = configureStore({ reducer: rootReducer, preloadedState }),
+    ...renderOptions
+  }
+) {
+  function Wrapper({ children }) {
+    return <Provider store={store}>{children}</Provider>;
+  }
+
+  return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) };
+}
