@@ -12,7 +12,7 @@ it("Action: It should create a todo", () => {
   store.dispatch(addTodo(todo));
 
   // assert
-  expect(store.getState()).toEqual({ todos: { [todo.title]: todo } });
+  expect(store.getState()).toEqual({ todos: { [todo.id]: todo } });
 });
 
 it("Reducer: It should create a todo", () => {
@@ -23,11 +23,12 @@ it("Reducer: It should create a todo", () => {
   const newState = todosReducer({}, addTodo(todo));
 
   // assert
-  expect(newState).toEqual({ [todo.title]: todo });
+  expect(newState).toEqual({ [todo.id]: todo });
 });
 
 function setupTodo() {
   return {
+    id: "sxkamsxkasmckms",
     title: "Buy groceries",
     dueDate: "Due: March 15, 2023",
     priority: "High",
