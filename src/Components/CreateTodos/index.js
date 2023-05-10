@@ -31,7 +31,7 @@ function CreateTodos({ currentTodo }) {
   };
 
   return (
-    <form method="post" onSubmit={handleSubmit}>
+    <form method="post" onSubmit={handleSubmit} className="create-todo">
       <div className="form-group">
         <label htmlFor="title">Title</label>
         <input

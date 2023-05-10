@@ -20,10 +20,10 @@ form {
   margin-bottom: 10px;
 }
 
-input[type="radio"] {
+.create-todo input[type="radio"] {
   width: 10px;
 }
 
-button {
+.create-todo button {
   width: 30vw;
 }
