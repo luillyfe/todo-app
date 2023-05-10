@@ -3,6 +3,7 @@ import { createAction, createReducer, createSelector } from "@reduxjs/toolkit";
 import { generateId } from "../../utils";
 
 export const addTodo = createAction("todos/addTodo");
+export const deleteTodo = createAction("todos/deleteTodo");
 
 export const selectTodos = createSelector(
   (state) => state.todos,
@@ -17,8 +18,12 @@ export const selectTodosById = createSelector(
 
 const initialState = {};
 export default createReducer(initialState, (builder) => {
-  builder.addCase(addTodo, (todos, action) => {
-    const id = generateId();
-    todos[id] = { ...action.payload, id };
-  });
+  builder
+    .addCase(addTodo, (todos, action) => {
+      const id = generateId();
+      todos[id] = { ...action.payload, id };
+    })
+    .addCase(deleteTodo, (todos, action) => {
+      delete todos[action.payload];
+    });
 });
