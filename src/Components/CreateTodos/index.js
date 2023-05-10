@@ -12,8 +12,8 @@ const initialState = {
   status: "",
 };
 
-function CreateTodos() {
-  const [todo, setTodo] = useState(initialState);
+function CreateTodos({ currentTodo }) {
+  const [todo, setTodo] = useState(currentTodo || initialState);
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {

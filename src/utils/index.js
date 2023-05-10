@@ -22,3 +22,18 @@ export function createTodos() {
   }
   return todos;
 }
+
+export function generateId() {
+  const crypto = window.crypto;
+
+  // Generate a 16-byte array of cryptographically secure random values.
+  const randomBytes = crypto.getRandomValues(new Uint16Array(16));
+
+  // Convert the array of random bytes to a string.
+  const randomId = Array.from(randomBytes)
+    .map((byte) => byte.toString(16))
+    .join("");
+
+  // return random id to the console.
+  return randomId;
+}
