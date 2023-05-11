@@ -97,8 +97,8 @@ function CreateTodos({ currentTodo }) {
             value="pending"
             onChange={handleChange}
           />
-          <label className="form-check-label" htmlFor="flexRadioDefault1">
-            pending
+          <label className="form-check-label" htmlFor="status1">
+            Pending
           </label>
         </div>
         <div className="form-check">
@@ -111,7 +111,7 @@ function CreateTodos({ currentTodo }) {
             onChange={handleChange}
             checked
           />
-          <label className="form-check-label" htmlFor="flexRadioDefault2">
+          <label className="form-check-label" htmlFor="status2">
             Completed
           </label>
         </div>
