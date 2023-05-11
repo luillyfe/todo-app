@@ -34,6 +34,20 @@
   position: absolute;
   top: 5px;
   right: 5px;
+
+  padding: 4px 8px;
+}
+
+.todo {
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: 4px;
+
+  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/38816/image-from-rawpixel-id-594540-png.png"),
+    url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/38816/paperboard-texture_95678-72.jpg");
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
+  background-size: contain;
 }
 
 .btn-delete p {

@@ -88,27 +88,32 @@ function CreateTodos({ currentTodo }) {
       </div>
       <div className="form-group">
         <label>Status</label>
-        <div className="form-option">
+        <div className="form-check">
           <input
-            className="form-control"
+            className="form-check-input"
             type="radio"
             id="status1"
             name="status"
             value="pending"
             onChange={handleChange}
           />
-          <label htmlFor="status1">Pending</label>
+          <label className="form-check-label" htmlFor="flexRadioDefault1">
+            pending
+          </label>
         </div>
-        <div className="form-option">
+        <div className="form-check">
           <input
+            className="form-check-input"
             type="radio"
-            className="form-control"
             id="status2"
             name="status"
             value="completed"
             onChange={handleChange}
+            checked
           />
-          <label htmlFor="status2">Completed</label>
+          <label className="form-check-label" htmlFor="flexRadioDefault2">
+            Completed
+          </label>
         </div>
       </div>
       <button type="submit" className="btn btn-primary">
