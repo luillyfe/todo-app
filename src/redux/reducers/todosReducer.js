@@ -1,7 +1,5 @@
 import { createAction, createReducer, createSelector } from "@reduxjs/toolkit";
 
-import { generateId } from "../../utils";
-
 export const addTodo = createAction("todos/addTodo");
 
 export const selectTodos = createSelector(
@@ -18,7 +16,7 @@ export const selectTodosById = createSelector(
 const initialState = {};
 export default createReducer(initialState, (builder) => {
   builder.addCase(addTodo, (todos, action) => {
-    const id = generateId();
-    todos[id] = { ...action.payload, id };
+    const id = action.payload.id;
+    todos[id] = { ...action.payload };
   });
 });
