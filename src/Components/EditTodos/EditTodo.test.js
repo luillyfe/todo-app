@@ -7,7 +7,7 @@ import { render, screen } from "@testing-library/react";
 import EditTodos from "./index";
 import rootReducer from "../../redux/reducers";
 
-it("It should find elments with its corresponding labels", () => {
+it("Should find elments with its corresponding labels", () => {
   // arrange
   renderWithProviders(<EditTodos />, {});
 
