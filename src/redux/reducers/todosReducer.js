@@ -1,6 +1,7 @@
 import { createAction, createReducer, createSelector } from "@reduxjs/toolkit";
 
 export const addTodo = createAction("todos/addTodo");
+export const deleteTodo = createAction("todos/deleteTodo");
 
 export const selectTodos = createSelector(
   (state) => state.todos,
@@ -15,8 +16,12 @@ export const selectTodosById = createSelector(
 
 const initialState = {};
 export default createReducer(initialState, (builder) => {
-  builder.addCase(addTodo, (todos, action) => {
-    const id = action.payload.id;
-    todos[id] = { ...action.payload };
-  });
+  builder
+    .addCase(addTodo, (todos, action) => {
+      const id = action.payload.id;
+      todos[id] = { ...action.payload };
+    })
+    .addCase(deleteTodo, (todos, action) => {
+      delete todos[action.payload];
+    });
 });
