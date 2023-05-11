@@ -32,7 +32,7 @@ function renderTodo(
       <div className="btn-delete">
         <button
           type="button"
-          class="btn btn-danger"
+          className="btn btn-danger"
           onClick={() => handleDelete(id)}
         >
           X
