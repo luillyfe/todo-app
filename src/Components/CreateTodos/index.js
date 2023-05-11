@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import "./createTodos.css";
 import { useDispatch } from "react-redux";
 import { addTodo } from "../../redux/reducers/todosReducer";
+import { generateId } from "../../utils";
 
 const initialState = {
   title: "",
@@ -19,6 +20,7 @@ function CreateTodos({ currentTodo }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    todo.id = generateId();
     dispatch(addTodo(todo));
     setTodo(initialState);
   };
