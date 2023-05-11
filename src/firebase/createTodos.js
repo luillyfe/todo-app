@@ -5,7 +5,8 @@ const collectionId = "todos";
 
 async function createTodo(todo) {
   try {
-    await addDoc(collection(db, collectionId), todo);
+    const docRef = await addDoc(collection(db, collectionId), todo);
+    return docRef.id;
   } catch (e) {
     console.error("Error adding document: ", e);
     // send error up above for further handling

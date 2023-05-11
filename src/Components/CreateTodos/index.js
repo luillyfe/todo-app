@@ -20,7 +20,6 @@ function CreateTodos({ currentTodo }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    todo.id = generateId();
     dispatch(addTodo(todo));
     setTodo(initialState);
   };
