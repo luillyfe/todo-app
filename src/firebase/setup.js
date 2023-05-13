@@ -18,4 +18,6 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
-const analytics = isSupported().then((yes) => (yes ? getAnalytics(app) : {}));
+
+// get Analytic working
+isSupported().then((yes) => (yes ? getAnalytics(app) : {}));
