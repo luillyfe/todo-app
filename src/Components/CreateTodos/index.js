@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import "./createTodos.css";
 import { useDispatch } from "react-redux";
 import { addTodo } from "../../redux/reducers/todosReducer";
-import { generateId } from "../../utils";
 
 const initialState = {
   title: "",
