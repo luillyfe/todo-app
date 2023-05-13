@@ -3,28 +3,24 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import todosReducer, { addTodo, deleteTodo } from "./todosReducer";
 
+jest.mock("../../firebase", () => {
+  const createTodo = () => "sxkamsxkasmckms";
+  return {
+    createTodo,
+  };
+});
+
 describe("Creating todos", () => {
-  it("Store: It should create a todo", () => {
+  it("Store: It should create a todo", async () => {
     // arrange
     const store = configureStore({ reducer: { todos: todosReducer } });
     const todo = setupTodo();
 
     // act
-    store.dispatch(addTodo(todo));
+    await store.dispatch(addTodo(todo));
 
     // assert
     expect(store.getState()).toEqual({ todos: { [todo.id]: todo } });
-  });
-
-  it("Reducer: It should create a todo", () => {
-    // arrange
-    const todo = setupTodo();
-
-    // act
-    const newState = todosReducer({}, addTodo(todo));
-
-    // assert
-    expect(newState).toEqual({ [todo.id]: todo });
   });
 });
 
