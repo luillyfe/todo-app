@@ -8,8 +8,9 @@ import rootReducer from "../../redux/reducers";
 import { createTodos } from "../../utils";
 import ListTodos from "./index";
 
-const todos = createTodos(1);
 describe("DeleteTodos:", () => {
+  const todos = createTodos(1);
+
   it("Should have a delete button", () => {
     // arrange
     renderWithProps(<ListTodos />, {
@@ -45,7 +46,7 @@ function renderWithProps(
 ) {
   function Wrapper({ children }) {
     return (
-      <MemoryRouter>
+      <MemoryRouter initialEntries={["/todos/edit/todo0"]}>
         <Provider store={store}>{children}</Provider>
       </MemoryRouter>
     );
