@@ -18,7 +18,6 @@ describe("DeleteTodos:", () => {
 
     // assert
     screen.getByText("X");
-    expect(screen.getByText("X")).toBeInTheDocument();
   });
 
   it("When click in delete, it should delete the todo", () => {

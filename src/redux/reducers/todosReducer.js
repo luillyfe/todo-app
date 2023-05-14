@@ -20,7 +20,7 @@ export const addTodo = createAsyncThunk("todos/addTodo", async (todo) => {
   }
 });
 
-export const listTodos = createAsyncThunk("todos/listTodos", async () => {
+export const fetchTodos = createAsyncThunk("todos/fetchTodos", async () => {
   try {
     const todos = await firebaseAPI.listTodos();
     return todos;
@@ -46,7 +46,7 @@ export const selectTodosById = createSelector(
 const initialState = {};
 export default createReducer(initialState, (builder) => {
   builder
-    .addCase(listTodos.fulfilled, (todos, action) => {
+    .addCase(fetchTodos.fulfilled, (todos, action) => {
       replaceTodos(todos, action.payload);
     })
     .addCase(addTodo.fulfilled, (todos, action) => {

@@ -8,7 +8,7 @@ import "./todoList.css";
 import {
   selectTodos,
   deleteTodo,
-  listTodos,
+  fetchTodos,
 } from "../../redux/reducers/todosReducer";
 
 function ListTodos() {
@@ -20,7 +20,7 @@ function ListTodos() {
   };
 
   useEffect(() => {
-    dispatch(listTodos());
+    dispatch(fetchTodos());
   }, [dispatch]);
 
   return <ul className="list-todos">{renderTodos(todos, handleDelete)}</ul>;
