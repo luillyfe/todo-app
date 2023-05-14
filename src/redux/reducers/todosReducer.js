@@ -6,17 +6,31 @@ import {
 } from "@reduxjs/toolkit";
 import firebaseAPI from "../../firebase";
 
+// action creators
+export const deleteTodo = createAction("todos/deleteTodo");
+
+// async action creators (thunk)
 export const addTodo = createAsyncThunk("todos/addTodo", async (todo) => {
   try {
     const docRefId = await firebaseAPI.createTodo(todo);
     return { ...todo, id: docRefId };
   } catch (e) {
     // TODO: handle error
-    console.log(e);
+    console.error(e);
   }
 });
-export const deleteTodo = createAction("todos/deleteTodo");
 
+export const fetchTodos = createAsyncThunk("todos/fetchTodos", async () => {
+  try {
+    const todos = await firebaseAPI.listTodos();
+    return todos;
+  } catch (e) {
+    // TODO: handle error
+    console.error(e);
+  }
+});
+
+// select from store
 export const selectTodos = createSelector(
   (state) => state.todos,
   (todos) => (todos ? todos : {})
@@ -28,9 +42,13 @@ export const selectTodosById = createSelector(
   (todos, todoId) => (todos ? todos[todoId] : {})
 );
 
+// Todos Reducer
 const initialState = {};
 export default createReducer(initialState, (builder) => {
   builder
+    .addCase(fetchTodos.fulfilled, (todos, action) => {
+      replaceTodos(todos, action.payload);
+    })
     .addCase(addTodo.fulfilled, (todos, action) => {
       const id = action.payload.id;
       todos[id] = { ...action.payload };
@@ -39,3 +57,10 @@ export default createReducer(initialState, (builder) => {
       delete todos[action.payload];
     });
 });
+
+function replaceTodos(currentTodos, todosFromPersistentStorge) {
+  const todoIds = Object.keys(todosFromPersistentStorge);
+  todoIds.forEach((id) => {
+    currentTodos[id] = todosFromPersistentStorge[id];
+  });
+}
