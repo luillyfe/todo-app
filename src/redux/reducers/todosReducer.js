@@ -20,6 +20,16 @@ export const addTodo = createAsyncThunk("todos/addTodo", async (todo) => {
   }
 });
 
+export const updateTodo = createAsyncThunk("todos/updateTodo", async (todo) => {
+  try {
+    const docRefId = await firebaseAPI.updateTodo(todo);
+    return { ...todo, id: docRefId };
+  } catch (e) {
+    // TODO: handle error
+    console.error(e);
+  }
+});
+
 export const fetchTodos = createAsyncThunk("todos/fetchTodos", async () => {
   try {
     const todos = await firebaseAPI.listTodos();
@@ -53,6 +63,10 @@ export default createReducer(initialState, (builder) => {
       const id = action.payload.id;
       todos[id] = { ...action.payload };
     })
+    .addCase(updateTodo.fulfilled, (todos, action) => {
+      const id = action.payload.id;
+      todos[id] = { ...action.payload };
+    })
     .addCase(deleteTodo, (todos, action) => {
       delete todos[action.payload];
     });
@@ -61,6 +75,6 @@ export default createReducer(initialState, (builder) => {
 function replaceTodos(currentTodos, todosFromPersistentStorge) {
   const todoIds = Object.keys(todosFromPersistentStorge);
   todoIds.forEach((id) => {
-    currentTodos[id] = todosFromPersistentStorge[id];
+    currentTodos[id] = { ...todosFromPersistentStorge[id], id };
   });
 }
