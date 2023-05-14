@@ -94,6 +94,7 @@ function CreateTodos({ currentTodo }) {
             name="status"
             value="pending"
             onChange={handleChange}
+            checked={todo.status === "pending"}
           />
           <label className="form-check-label" htmlFor="status1">
             Pending
@@ -107,7 +108,7 @@ function CreateTodos({ currentTodo }) {
             name="status"
             value="completed"
             onChange={handleChange}
-            checked
+            checked={todo.status === "completed"}
           />
           <label className="form-check-label" htmlFor="status2">
             Completed
