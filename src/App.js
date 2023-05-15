@@ -1,7 +1,9 @@
 import { React } from "react";
 import { Outlet, Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 import "bootstrap/dist/css/bootstrap.css";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 function App() {
@@ -23,6 +25,7 @@ function App() {
       <div id="detail">
         <Outlet />
       </div>
+      <ToastContainer />
     </div>
   );
 }
