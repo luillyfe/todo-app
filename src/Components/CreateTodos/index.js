@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import "./createTodos.css";
 import { useDispatch } from "react-redux";
-import { addTodo } from "../../redux/reducers/todosReducer";
+import { addTodo, updateTodo } from "../../redux/reducers/todosReducer";
 
 const initialState = {
   title: "",
@@ -19,7 +19,12 @@ function CreateTodos({ currentTodo }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(addTodo(todo));
+    if (todo.id) {
+      dispatch(updateTodo(todo));
+    } else {
+      dispatch(addTodo(todo));
+    }
+
     setTodo(initialState);
   };
 
@@ -94,6 +99,7 @@ function CreateTodos({ currentTodo }) {
             name="status"
             value="pending"
             onChange={handleChange}
+            checked={todo.status === "pending"}
           />
           <label className="form-check-label" htmlFor="status1">
             Pending
@@ -107,7 +113,7 @@ function CreateTodos({ currentTodo }) {
             name="status"
             value="completed"
             onChange={handleChange}
-            checked
+            checked={todo.status === "completed"}
           />
           <label className="form-check-label" htmlFor="status2">
             Completed
@@ -115,7 +121,7 @@ function CreateTodos({ currentTodo }) {
         </div>
       </div>
       <button type="submit" className="btn btn-primary">
-        Create
+        {todo.id ? "Edit" : "Create"}
       </button>
     </form>
   );

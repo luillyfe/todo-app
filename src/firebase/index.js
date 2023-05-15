@@ -1,8 +1,9 @@
-import { createTodo, listTodos } from "./API";
+import { createTodo, listTodos, updateTodo } from "./API";
 
 const firebaseAPI = {
   createTodo,
   listTodos,
+  updateTodo,
 };
 
 export default firebaseAPI;

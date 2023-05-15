@@ -1,4 +1,10 @@
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  updateDoc,
+  doc,
+} from "firebase/firestore";
 import { db } from "./setup";
 
 const collectionId = "todos";
@@ -9,6 +15,17 @@ async function createTodo(todo) {
     return docRef.id;
   } catch (e) {
     console.error("Error adding document: ", e);
+    // send error up above for further handling
+    throw e;
+  }
+}
+
+async function updateTodo(todo) {
+  try {
+    await updateDoc(doc(db, collectionId, todo.id), todo);
+    return todo.id;
+  } catch (e) {
+    console.error(`Error updating document with id ${todo.id}:`, e);
     // send error up above for further handling
     throw e;
   }
@@ -31,4 +48,4 @@ async function listTodos() {
   // });
 }
 
-export { createTodo, listTodos };
+export { createTodo, listTodos, updateTodo };
