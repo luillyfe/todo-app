@@ -6,6 +6,7 @@ import {
 } from "@reduxjs/toolkit";
 import firebaseAPI from "../../firebase";
 
+// TODO: Connect to Firestore
 // action creators
 export const deleteTodo = createAction("todos/deleteTodo");
 
@@ -40,7 +41,7 @@ export const fetchTodos = createAsyncThunk("todos/fetchTodos", async () => {
   }
 });
 
-// select from store
+// Selectors
 export const selectTodos = createSelector(
   (state) => state.todos,
   (todos) => (todos ? todos : {})

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 import { addTodo, updateTodo } from "../../redux/reducers/todosReducer";
+import { selectOngoingAPICalls } from "../../redux/reducers/ongoingAPICallsReducer";
 
 import "./createTodos.css";
 
@@ -17,6 +18,7 @@ const initialState = {
 function CreateTodos({ currentTodo }) {
   const [todo, setTodo] = useState(currentTodo || initialState);
   const dispatch = useDispatch();
+  const loading = useSelector(selectOngoingAPICalls);
 
   const notify = () => {
     toast.success("Todo added!", {
@@ -130,7 +132,7 @@ function CreateTodos({ currentTodo }) {
           </label>
         </div>
       </div>
-      <button type="submit" className="btn btn-primary">
+      <button type="submit" className={`btn btn-primary`} disabled={loading}>
         {/* TODO: Edit button must come from Edit Component */}
         {todo.id ? "Edit" : "Create"}
       </button>

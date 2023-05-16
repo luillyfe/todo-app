@@ -1,9 +1,13 @@
-import { createReducer, isAnyOf } from "@reduxjs/toolkit";
+import { createReducer, isAnyOf, createSelector } from "@reduxjs/toolkit";
 
 import { addTodo } from "./todosReducer";
 
-const initialState = { count: 0 };
+export const selectOngoingAPICalls = createSelector(
+  (state) => state.ongoingAPICalls,
+  (ongoingAPICalls) => (ongoingAPICalls ? ongoingAPICalls.count : 0)
+);
 
+const initialState = { count: 0 };
 const ongoingAPICallsReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(addTodo.pending, (ongoingAPICalls) => {
