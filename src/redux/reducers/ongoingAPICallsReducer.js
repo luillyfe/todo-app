@@ -7,7 +7,6 @@ const initialState = { count: 0 };
 const ongoingAPICallsReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(addTodo.pending, (ongoingAPICalls) => {
-      debugger;
       ongoingAPICalls.count += 1;
     })
     .addMatcher(
