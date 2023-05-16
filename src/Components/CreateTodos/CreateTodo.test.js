@@ -1,13 +1,16 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent, act } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 
 import rootReducer from "../../redux/reducers";
+import firebaseAPI from "../../firebase";
 import CreateTodos from "./index";
 
+jest.mock("../../firebase");
+
 describe("CreateTodos:", () => {
-  it("It should render a form", () => {
+  it("Should render a form", () => {
     // arrange
     renderWithProps(<CreateTodos />, {});
 
@@ -18,14 +21,18 @@ describe("CreateTodos:", () => {
   });
 });
 
-// TODO: Add test cases for Create Todos async operation
-// test("create a todo after clicking the create button", async () => {
-//   renderWithProps(<CreateTodos />, {});
+beforeAll(() => firebaseAPI.createTodo.mockResolvedValue("docRefId"));
+test("create a todo after clicking the create button", async () => {
+  renderWithProps(<CreateTodos />, {});
 
-//   fireEvent.click(screen.getByRole("button", { name: /Create/i }));
+  const createButton = screen.getByRole("button", { name: /Create/i });
+  expect(createButton).toBeEnabled();
+  await act(async () => {
+    fireEvent.click(createButton);
+  });
 
-//   await screen.
-// });
+  expect(createButton).toBeEnabled();
+});
 
 function renderWithProps(
   ui,

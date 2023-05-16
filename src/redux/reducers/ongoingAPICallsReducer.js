@@ -4,7 +4,7 @@ import { addTodo } from "./todosReducer";
 
 export const selectOngoingAPICalls = createSelector(
   (state) => state.ongoingAPICalls,
-  (ongoingAPICalls) => (ongoingAPICalls ? ongoingAPICalls.count : 0)
+  (ongoingAPICalls) => (ongoingAPICalls ? ongoingAPICalls.count > 0 : false)
 );
 
 const initialState = { count: 0 };
