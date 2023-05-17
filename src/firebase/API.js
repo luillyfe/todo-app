@@ -3,6 +3,7 @@ import {
   addDoc,
   getDocs,
   updateDoc,
+  deleteDoc,
   doc,
 } from "firebase/firestore";
 import { db } from "./setup";
@@ -48,4 +49,14 @@ async function listTodos() {
   // });
 }
 
-export { createTodo, listTodos, updateTodo };
+async function deleteTodo(todoId) {
+  try {
+    const res = await deleteDoc(doc(db, collectionId, todoId));
+    console.log(res);
+  } catch (e) {
+    console.error(`Something went wrong when deleting a document: ${e}`);
+    throw e;
+  }
+}
+
+export { createTodo, listTodos, updateTodo, deleteTodo };
