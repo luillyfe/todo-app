@@ -51,8 +51,7 @@ async function listTodos() {
 
 async function deleteTodo(todoId) {
   try {
-    const res = await deleteDoc(doc(db, collectionId, todoId));
-    console.log(res);
+    await deleteDoc(doc(db, collectionId, todoId));
   } catch (e) {
     console.error(`Something went wrong when deleting a document: ${e}`);
     throw e;
