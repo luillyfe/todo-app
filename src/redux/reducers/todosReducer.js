@@ -1,14 +1,24 @@
 import {
-  createAction,
   createAsyncThunk,
   createReducer,
   createSelector,
 } from "@reduxjs/toolkit";
+
 import firebaseAPI from "../../firebase";
 
-// TODO: Connect to Firestore
 // action creators
-export const deleteTodo = createAction("todos/deleteTodo");
+export const deleteTodo = createAsyncThunk(
+  "todos/deleteTodo",
+  async (todoId) => {
+    try {
+      await firebaseAPI.deleteTodo(todoId);
+      return todoId;
+    } catch {
+      // TODO: Handle error
+      console.error();
+    }
+  }
+);
 
 // async action creators (thunk)
 export const addTodo = createAsyncThunk("todos/addTodo", async (todo) => {
@@ -68,7 +78,7 @@ export default createReducer(initialState, (builder) => {
       const id = action.payload.id;
       todos[id] = { ...action.payload };
     })
-    .addCase(deleteTodo, (todos, action) => {
+    .addCase(deleteTodo.fulfilled, (todos, action) => {
       delete todos[action.payload];
     });
 });

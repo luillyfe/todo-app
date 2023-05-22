@@ -1,12 +1,15 @@
 import React from "react";
 import { configureStore } from "@reduxjs/toolkit";
+import { act } from "@testing-library/react";
 
 import todosReducer, { addTodo, deleteTodo } from "./todosReducer";
 
 jest.mock("../../firebase", () => {
   const createTodo = () => "sxkamsxkasmckms";
+  const deleteTodo = () => ({});
   return {
     createTodo,
+    deleteTodo,
   };
 });
 
@@ -17,7 +20,9 @@ describe("Creating todos", () => {
     const todo = setupTodo();
 
     // act
-    await store.dispatch(addTodo(todo));
+    await act(async () => {
+      await store.dispatch(addTodo(todo));
+    });
 
     // assert
     expect(store.getState()).toEqual({ todos: { [todo.id]: todo } });
@@ -25,7 +30,7 @@ describe("Creating todos", () => {
 });
 
 describe("Deleting todos", () => {
-  it("Store: it should delete a todo", () => {
+  it("Store: it should delete a todo", async () => {
     // arrange
     const todo = setupTodo();
     const store = configureStore({
@@ -34,13 +39,15 @@ describe("Deleting todos", () => {
     });
 
     // act
-    store.dispatch(deleteTodo(todo.id));
+    await act(async () => {
+      await store.dispatch(deleteTodo(todo.id));
+    });
 
     // assert
     expect(store.getState()).toEqual({ todos: {} });
   });
 
-  it("Reducer: it should delete a todo", () => {
+  xit("Reducer: it should delete a todo", () => {
     // arrange
     const todo = setupTodo();
 

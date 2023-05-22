@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { formatDate } from "../../utils";
 
@@ -17,6 +18,7 @@ function ListTodos() {
 
   const handleDelete = (todoId) => {
     dispatch(deleteTodo(todoId));
+    notify();
   };
 
   useEffect(() => {
@@ -26,7 +28,7 @@ function ListTodos() {
   return <ul className="list-todos">{renderTodos(todos, handleDelete)}</ul>;
 }
 
-// renderTodos(obj, fn) => []
+// renderTodos(obj<todo[]>, fn) => []
 function renderTodos(todos, handleDelete) {
   const todoIds = Object.keys(todos);
 
@@ -54,6 +56,13 @@ function renderTodos(todos, handleDelete) {
         </Link>
       </li>
     );
+  });
+}
+
+function notify() {
+  toast.success("Todo deleted!", {
+    position: toast.POSITION.TOP_RIGHT,
+    toastId: "Todo deleted!",
   });
 }
 
